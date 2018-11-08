@@ -21,7 +21,7 @@
             </p>
         </div>
 
-        <a class="panel-block is-active" v-for="item, key in lists">
+        <!-- <a class="panel-block is-active" v-for="item, key in lists"> -->
             <span class="column is-9">
                 {{item.name}}
             </span>

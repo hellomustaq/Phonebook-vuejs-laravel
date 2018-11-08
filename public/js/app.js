@@ -46913,87 +46913,66 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "nav",
-        { staticClass: "panel column is-offset-2 is-8" },
-        [
-          _c("p", { staticClass: "panel-heading" }, [
-            _vm._v("\n            VueJs Phonebook\n            "),
-            _c(
-              "button",
-              {
-                staticClass: "button is-link is-outlined",
-                on: { click: _vm.openAdd }
-              },
-              [_vm._v("\n                Add New\n            ")]
-            ),
-            _vm._v(" "),
-            _vm.loading
-              ? _c("span", { staticClass: "is-pulled-right" }, [
-                  _c("i", { staticClass: "fa fa-spinner fa-pulse fa-2x fa-fw" })
-                ])
-              : _vm._e()
-          ]),
+      _c("nav", { staticClass: "panel column is-offset-2 is-8" }, [
+        _c("p", { staticClass: "panel-heading" }, [
+          _vm._v("\n            VueJs Phonebook\n            "),
+          _c(
+            "button",
+            {
+              staticClass: "button is-link is-outlined",
+              on: { click: _vm.openAdd }
+            },
+            [_vm._v("\n                Add New\n            ")]
+          ),
           _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._l(_vm.lists, function(item, key) {
-            return _c("a", { staticClass: "panel-block is-active" }, [
-              _c("span", { staticClass: "column is-9" }, [
-                _vm._v(
-                  "\n                " + _vm._s(item.name) + "\n            "
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "panel-icon has-text-info column is-1" },
-                [
-                  _c("i", {
-                    staticClass: "ion-edit",
-                    on: {
-                      click: function($event) {
-                        _vm.openUpdate(key)
-                      }
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "panel-icon has-text-danger column is-1" },
-                [
-                  _c("i", {
-                    staticClass: "ion-android-delete",
-                    on: {
-                      click: function($event) {
-                        _vm.del(key, item.id)
-                      }
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "panel-icon has-text-primary column is-1" },
-                [
-                  _c("i", {
-                    staticClass: "ion-eye",
-                    on: {
-                      click: function($event) {
-                        _vm.openShow(key)
-                      }
-                    }
-                  })
-                ]
-              )
-            ])
+          _vm.loading
+            ? _c("span", { staticClass: "is-pulled-right" }, [
+                _c("i", { staticClass: "fa fa-spinner fa-pulse fa-2x fa-fw" })
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("span", { staticClass: "column is-9" }, [
+          _vm._v(
+            "\n                " + _vm._s(_vm.item.name) + "\n            "
+          )
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "panel-icon has-text-info column is-1" }, [
+          _c("i", {
+            staticClass: "ion-edit",
+            on: {
+              click: function($event) {
+                _vm.openUpdate(_vm.key)
+              }
+            }
           })
-        ],
-        2
-      ),
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "panel-icon has-text-danger column is-1" }, [
+          _c("i", {
+            staticClass: "ion-android-delete",
+            on: {
+              click: function($event) {
+                _vm.del(_vm.key, _vm.item.id)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "panel-icon has-text-primary column is-1" }, [
+          _c("i", {
+            staticClass: "ion-eye",
+            on: {
+              click: function($event) {
+                _vm.openShow(_vm.key)
+              }
+            }
+          })
+        ])
+      ]),
       _vm._v(" "),
       _c("Add", {
         attrs: { openmodal: _vm.addActive },
