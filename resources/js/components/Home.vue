@@ -21,7 +21,7 @@
                 {{item.name}}
             </span>
              <span class="panel-icon has-text-info column is-1">
-                <i class="ion-edit"></i>
+                <i class="ion-edit" @click="openUpdate(key)"></i>
             </span>
             <span class="panel-icon has-text-danger column is-1">
                 <i class="ion-android-delete"></i>
@@ -32,8 +32,9 @@
         </a>
     </nav>
 
-    <Add :openmodal='addActive' @closeRequest="closeAdd"></Add>
-    <Show :openmodal="showActive" @closeRequest="closeAdd"></Show>
+    <Add :openmodal='addActive' @closeRequest="close"></Add>
+    <Show :openmodal="showActive" @closeRequest="close"></Show>
+    <Update :openmodal="updateActive" @closeRequest="close"></Update>
 
 </div>
 </template>
@@ -41,12 +42,14 @@
 <script>
     let Add = require('./Add.vue');
     let Show = require('./Show.vue');
+    let Update = require('./Update.vue');
     export default {
-        components:{Add,Show},
+        components:{Add,Show,Update},
         data(){
             return{
                 addActive:'',
                 showActive:'',
+                updateActive:'',
                 lists:{},
                 errors:{}
             }
@@ -61,13 +64,17 @@
             openAdd(){
                 this.addActive = 'is-active';
             },
-            closeAdd(){
-                this.addActive = this.showActive = '';
+            close(){
+                this.addActive = this.showActive = this.updateActive= '';
             },
             openShow(key){
                 this.$children[1].list=this.lists[key];
                 this.showActive = 'is-active';
             },
+            openUpdate(key){
+                this.$children[2].list=this.lists[key];
+                this.updateActive = 'is-active';
+            }
         }
     }
 </script>
