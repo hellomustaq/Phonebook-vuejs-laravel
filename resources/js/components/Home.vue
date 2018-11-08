@@ -6,6 +6,11 @@
             <button class="button is-link is-outlined" @click="openAdd">
                 Add New
             </button>
+            <span class="is-pulled-right" v-if="loading">
+                <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+            </span>
+            
+            <!-- <span class="sr-only">Loading...</span> -->
         </p>
         <div class="panel-block">
             <p class="control has-icons-left">
@@ -24,7 +29,7 @@
                 <i class="ion-edit" @click="openUpdate(key)"></i>
             </span>
             <span class="panel-icon has-text-danger column is-1">
-                <i class="ion-android-delete"></i>
+                <i class="ion-android-delete" @click="del(key,item.id)"></i>
             </span>
             <span class="panel-icon has-text-primary column is-1" >
                 <i class="ion-eye" @click="openShow(key)"></i>
@@ -51,7 +56,8 @@
                 showActive:'',
                 updateActive:'',
                 lists:{},
-                errors:{}
+                errors:{},
+                loading:false
             }
         },
 
@@ -65,7 +71,7 @@
                 this.addActive = 'is-active';
             },
             close(){
-                this.addActive = this.showActive = this.updateActive= '';
+                this.addActive = this.showActive = this.updateActive= this.deleteActive= '';
             },
             openShow(key){
                 this.$children[1].list=this.lists[key];
@@ -74,6 +80,13 @@
             openUpdate(key){
                 this.$children[2].list=this.lists[key];
                 this.updateActive = 'is-active';
+            },
+            del(key,id){
+                if (confirm("Are You Sure ?")) {
+                    this.loading = !this.loading
+                    axios.delete(`/phonebook/${id}`).then((response) => {this.lists.splice(key,1);this.loading=!this.loading})
+                    .catch((error) => this.errors=error.response.data.errors)
+                }
             }
         }
     }

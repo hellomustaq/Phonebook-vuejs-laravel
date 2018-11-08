@@ -46394,6 +46394,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 var Add = __webpack_require__(11);
 var Show = __webpack_require__(12);
@@ -46406,7 +46411,8 @@ var Update = __webpack_require__(66);
             showActive: '',
             updateActive: '',
             lists: {},
-            errors: {}
+            errors: {},
+            loading: false
         };
     },
     mounted: function mounted() {
@@ -46425,7 +46431,7 @@ var Update = __webpack_require__(66);
             this.addActive = 'is-active';
         },
         close: function close() {
-            this.addActive = this.showActive = this.updateActive = '';
+            this.addActive = this.showActive = this.updateActive = this.deleteActive = '';
         },
         openShow: function openShow(key) {
             this.$children[1].list = this.lists[key];
@@ -46434,6 +46440,18 @@ var Update = __webpack_require__(66);
         openUpdate: function openUpdate(key) {
             this.$children[2].list = this.lists[key];
             this.updateActive = 'is-active';
+        },
+        del: function del(key, id) {
+            var _this2 = this;
+
+            if (confirm("Are You Sure ?")) {
+                this.loading = !this.loading;
+                axios.delete('/phonebook/' + id).then(function (response) {
+                    _this2.lists.splice(key, 1);_this2.loading = !_this2.loading;
+                }).catch(function (error) {
+                    return _this2.errors = error.response.data.errors;
+                });
+            }
         }
     }
 });
@@ -46908,7 +46926,13 @@ var render = function() {
                 on: { click: _vm.openAdd }
               },
               [_vm._v("\n                Add New\n            ")]
-            )
+            ),
+            _vm._v(" "),
+            _vm.loading
+              ? _c("span", { staticClass: "is-pulled-right" }, [
+                  _c("i", { staticClass: "fa fa-spinner fa-pulse fa-2x fa-fw" })
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _vm._m(0),
@@ -46936,7 +46960,20 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(1, true),
+              _c(
+                "span",
+                { staticClass: "panel-icon has-text-danger column is-1" },
+                [
+                  _c("i", {
+                    staticClass: "ion-android-delete",
+                    on: {
+                      click: function($event) {
+                        _vm.del(key, item.id)
+                      }
+                    }
+                  })
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "span",
@@ -46996,16 +47033,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      { staticClass: "panel-icon has-text-danger column is-1" },
-      [_c("i", { staticClass: "ion-android-delete" })]
-    )
   }
 ]
 render._withStripped = true
