@@ -46542,7 +46542,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/phonebook', this.$data.list).then(function (response) {
                 _this.closeAdd();
-                _this.$parent.lists.push(_this.$data.list);
+                _this.$parent.lists.push(response.data);
             }).catch(function (error) {
                 return _this.errors = error.response.data.errors;
             });
