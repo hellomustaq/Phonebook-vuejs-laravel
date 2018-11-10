@@ -72,7 +72,10 @@
                 this.$emit('closeRequest');
             },
             save : function(){
-                axios.post('/phonebook',this.$data.list).then((response) => this.closeAdd())
+                axios.post('/phonebook',this.$data.list).then((response) => {
+                    this.closeAdd()
+                    this.$parent.lists.push(this.$data.list)
+                    })
                 .catch((error) => this.errors=error.response.data.errors)
             }
             
