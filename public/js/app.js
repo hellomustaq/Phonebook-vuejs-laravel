@@ -46452,7 +46452,6 @@ var Update = __webpack_require__(52);
                     return _this2.errors = error.response.data.errors;
                 });
             }
-            console.log(id + ' ' + key);
         }
     }
 });
@@ -46543,6 +46542,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/phonebook', this.$data.list).then(function (response) {
                 _this.closeAdd();
                 _this.$parent.lists.push(response.data);
+                _this.$parent.lists.sort(function (a, b) {
+                    if (a.name > b.name) {
+                        return 1;
+                    } else if (a.name < b.name) {
+                        return -1;
+                    }
+                });
+                _this.list = '';
             }).catch(function (error) {
                 return _this.errors = error.response.data.errors;
             });
