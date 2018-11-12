@@ -46424,9 +46424,9 @@ var Update = __webpack_require__(52);
 
             if (this.searchQuery.length > 0) {
                 this.temp = this.lists.filter(function (item) {
-                    return Object.keys(items).some(function (key) {
+                    return Object.keys(item).some(function (key) {
                         var string = String(item[key]);
-                        return item.name.toLowerCase().indexOf(_this.searchQuery.toLowerCase()) > -1;
+                        return string.toLowerCase().indexOf(_this.searchQuery.toLowerCase()) > -1;
                     });
                 });
             } else {
@@ -46454,11 +46454,11 @@ var Update = __webpack_require__(52);
             this.addActive = this.showActive = this.updateActive = this.deleteActive = '';
         },
         openShow: function openShow(key) {
-            this.$children[1].list = this.lists[key];
+            this.$children[1].list = this.temp[key];
             this.showActive = 'is-active';
         },
         openUpdate: function openUpdate(key) {
-            this.$children[2].list = this.lists[key];
+            this.$children[2].list = this.temp[key];
             this.updateActive = 'is-active';
         },
         del: function del(key, id) {

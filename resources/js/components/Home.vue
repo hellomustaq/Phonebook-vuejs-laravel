@@ -66,9 +66,9 @@
             searchQuery(){
                 if (this.searchQuery.length > 0) {
                     this.temp = this.lists.filter((item) =>{
-                        return Object.keys(items).some((key)=>{
-                            let string = String(item[key])
-                            return item.name.toLowerCase().indexOf(this.searchQuery.toLowerCase())>-1
+                        return Object.keys(item).some((key)=>{
+                            let string = String(item[key]);
+                            return string.toLowerCase().indexOf(this.searchQuery.toLowerCase())>-1
                         });
                         
                     });
@@ -91,11 +91,11 @@
                 this.addActive = this.showActive = this.updateActive= this.deleteActive= '';
             },
             openShow(key){
-                this.$children[1].list=this.lists[key];
+                this.$children[1].list=this.temp[key];
                 this.showActive = 'is-active';
             },
             openUpdate(key){
-                this.$children[2].list=this.lists[key];
+                this.$children[2].list=this.temp[key];
                 this.updateActive = 'is-active';
             },
             del(key,id){
