@@ -46424,7 +46424,10 @@ var Update = __webpack_require__(52);
 
             if (this.searchQuery.length > 0) {
                 this.temp = this.lists.filter(function (item) {
-                    return item.name.toLowerCase().indexOf(_this.searchQuery.toLowerCase()) > -1;
+                    return Object.keys(items).some(function (key) {
+                        var string = String(item[key]);
+                        return item.name.toLowerCase().indexOf(_this.searchQuery.toLowerCase()) > -1;
+                    });
                 });
             } else {
                 this.temp = this.lists;
